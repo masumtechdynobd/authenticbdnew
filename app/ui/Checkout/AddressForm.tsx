@@ -182,10 +182,10 @@ export default function AddressForm({
       {/* State */}
       {state && state.length > 1 && (
         <div className="mb-4">
-          <label className="block text-sm font-medium mb-2">Select City</label>
+          <label className="block text-sm font-medium mb-2">Select District</label>
           <Select value={formData?.state_id} onValueChange={handleSelectState}>
             <SelectTrigger className="w-full">
-              <SelectValue placeholder="Select a city" />
+              <SelectValue placeholder="Select District" />
             </SelectTrigger>
             <SelectContent>
               {state.map((item: any) => (
@@ -204,10 +204,10 @@ export default function AddressForm({
       {/* City */}
       {cities.length > 0 && (
         <div className="mb-4">
-          <label className="block text-sm font-medium mb-2">Select Area</label>
+          <label className="block text-sm font-medium mb-2">Select Area/Thana</label>
           <Select value={formData?.city_id} onValueChange={handleSelectCities}>
             <SelectTrigger className="w-full">
-              <SelectValue placeholder="Select a area" />
+              <SelectValue placeholder="Select Area/Thana" />
             </SelectTrigger>
             <SelectContent>
               {cities.map((item: any) => (
