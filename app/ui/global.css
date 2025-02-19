@@ -1207,6 +1207,10 @@
 
 @media only screen and (max-width: 600px) {
   .backdrop-blur-4.fixed.inset-0.z-\[999999\].bg-black\/40.data-\[state\=open\]\:animate-in.data-\[state\=closed\]\:animate-out.data-\[state\=closed\]\:fade-out-0.data-\[state\=open\]\:fade-in-0 {
-    display: none !important;
+    /* display: none !important; */
+  }
+
+  div#radix-\:Rmpmla\: {
+    z-index: 9999999 !important;
   }
 }

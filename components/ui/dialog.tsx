@@ -44,7 +44,7 @@ const DialogContent = React.forwardRef<
       {/* Add the DialogTitle here for accessibility */}
       <DialogHeader>
         {/* Option 1: Visible Title */}
-        <DialogTitle>Your Dialog Title</DialogTitle>
+        {/* <DialogTitle>Your Dialog Title</DialogTitle> */}
 
         {/* Option 2: Visually Hidden Title (if you don’t want it visible) */}
         {/* <VisuallyHidden>
