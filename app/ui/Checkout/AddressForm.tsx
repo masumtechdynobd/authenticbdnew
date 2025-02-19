@@ -100,18 +100,28 @@ export default function AddressForm({
       {/* Country/Region */}
       <div className="mb-4">
         <label className="block text-sm font-medium mb-2">Country/Region</label>
-        <Select value={formData?.country_id} onValueChange={handleSelectChange}>
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder="Select a country" />
-          </SelectTrigger>
-          <SelectContent>
-            {country.map((item: any) => (
-              <SelectItem key={item.id} value={item.id}>
-                {item.name}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        <Select
+          options={country.map((item: any) => ({
+            label: item.name,
+            value: item.id,
+          }))}
+          value={
+            formData?.country_id
+              ? {
+                  label: country.find(
+                    (item: any) => item.id === formData.country_id
+                  )?.name,
+                  value: formData.country_id,
+                }
+              : null
+          }
+          onChange={(selectedOption) =>
+            handleSelectChange(selectedOption?.value)
+          }
+          placeholder="Search & Select Country"
+          isSearchable
+          className="w-full"
+        />
         {errors?.country_id && (
           <p className="text-red-500 text-sm mt-1">{errors.country_id}</p>
         )}
