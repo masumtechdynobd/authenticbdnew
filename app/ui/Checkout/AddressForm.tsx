@@ -186,7 +186,7 @@ export default function AddressForm({
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Select District" />
             </SelectTrigger>
-            <SelectContent className="max-h-64 overflow-y-auto bg-white shadow-lg rounded-md">
+            <SelectContent className="sticky top-0 z-50 bg-white">
               <div className="p-2">
                 <input
                   type="text"
@@ -223,7 +223,7 @@ export default function AddressForm({
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Select Area/Thana" />
             </SelectTrigger>
-            <SelectContent className="max-h-64 overflow-y-auto bg-white shadow-lg rounded-md">
+            <SelectContent className="sticky top-0 z-50 bg-white">
               <div className="p-2">
                 <input
                   type="text"
