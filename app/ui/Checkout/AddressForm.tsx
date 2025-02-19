@@ -1,13 +1,14 @@
-import { useState, useEffect } from "react";
 import CustomInput from "@/app/ui/CustomInput";
 import {
-  Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import Select from "react-select";
 import { Textarea } from "@/components/ui/textarea";
+import { useState } from "react";
+import { useEffect } from "react";
 
 export default function AddressForm({
   errors,
@@ -17,12 +18,10 @@ export default function AddressForm({
   cities,
   formData,
   setFormData,
-  user,
+  user, // Assuming user is passed in as a prop or fetched from a context
 }: any) {
-  const [stateSearch, setStateSearch] = useState("");
-  const [citySearch, setCitySearch] = useState("");
-
   useEffect(() => {
+    // If the user is authenticated, set the form data to their saved information
     if (user) {
       setFormData({
         ...formData,
@@ -36,13 +35,16 @@ export default function AddressForm({
         additionalNote: user.additionalNote || "",
       });
     }
-  }, [user]);
+  }, [user]); // This will run when `user` is updated
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
     if (errors?.[name]) {
       setErrors({ ...errors, [name]: "" });
     }
@@ -63,20 +65,6 @@ export default function AddressForm({
       }
     }
   };
-  const handleSelectState = (value: string) => {
-    const existState = state.find((item: any) => item.id === value);
-    if (existState) {
-      setFormData({
-        ...formData,
-        state_id: value,
-        state_name: existState.name,
-      });
-      if (errors?.state_id) {
-        setErrors({ ...errors, state_id: "" });
-      }
-    }
-  };
-
   const handleSelectCities = (value: string) => {
     const existCities = cities.find((item: any) => item.id === value);
     if (existCities) {
@@ -85,9 +73,26 @@ export default function AddressForm({
         city_id: value,
         city_name: existCities.name,
       });
-      if (errors?.city_id) {
-        setErrors({ ...errors, city_id: "" });
-      }
+    }
+    // Clear error when user selects a country
+    if (errors?.city_id) {
+      setErrors({ ...errors, city_id: "" });
+    }
+  };
+  const handleSelectState = (value: string) => {
+    const existState = state.find((item: any) => item.id === value);
+    console.log(existState);
+    if (existState) {
+      setFormData({
+        ...formData,
+        state_id: value,
+        state_name: existState.name,
+      });
+    }
+    console.log(formData);
+    // Clear error when user selects a country
+    if (errors?.state_id) {
+      setErrors({ ...errors, state_id: "" });
     }
   };
   return (
@@ -176,8 +181,8 @@ export default function AddressForm({
         )}
       </div>
 
-      {/* State (District) */}
-      {state && state.length > 1 && (
+      {/* State */}
+      {/* {state && state.length > 1 && (
         <div className="mb-4">
           <label className="block text-sm font-medium mb-2">
             Select District
@@ -186,66 +191,81 @@ export default function AddressForm({
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Select District" />
             </SelectTrigger>
-            <SelectContent className="max-h-60 overflow-auto">
-              {/* Sticky search input */}
-              <div className="sticky top-0 bg-white z-50 p-2">
-                <input
-                  type="text"
-                  placeholder="Search District..."
-                  className="w-full px-2 py-1 border border-gray-300 rounded mb-2"
-                  value={stateSearch}
-                  onChange={(e) => setStateSearch(e.target.value)}
-                />
-              </div>
-              {/* Filtered select items */}
-              {state
-                .filter((item: any) =>
-                  item.name.toLowerCase().includes(stateSearch.toLowerCase())
-                )
-                .map((item: any) => (
-                  <SelectItem key={item.id} value={item.id}>
-                    {item.name}
-                  </SelectItem>
-                ))}
+            <SelectContent>
+              {state.map((item: any) => (
+                <SelectItem key={item.id} value={item.id}>
+                  {item.name}
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
           {errors?.state_id && (
             <p className="text-red-500 text-sm mt-1">{errors.state_id}</p>
           )}
         </div>
+      )} */}
+
+      {state && state.length > 1 && (
+        <div className="mb-4">
+          <label className="block text-sm font-medium mb-2">
+            Select District
+          </label>
+          <Select
+            options={state.map((item: any) => ({
+              label: item.name,
+              value: item.id,
+            }))}
+            value={
+              formData?.state_id
+                ? {
+                    label: state.find(
+                      (item: any) => item.id === formData?.state_id
+                    )?.name,
+                    value: formData.state_id,
+                  }
+                : null
+            }
+            onChange={(selectedOption) =>
+              handleSelectState(selectedOption?.value)
+            }
+            placeholder="Search & Select District"
+            isSearchable
+            className="w-full"
+          />
+          {errors?.state_id && (
+            <p className="text-red-500 text-sm mt-1">{errors.state_id}</p>
+          )}
+        </div>
       )}
 
-      {/* City (Area/Thana) */}
+      {/* City */}
       {cities.length > 0 && (
         <div className="mb-4">
           <label className="block text-sm font-medium mb-2">
             Select Area/Thana
           </label>
-          <Select value={formData?.city_id} onValueChange={handleSelectCities}>
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder="Select Area/Thana" />
-            </SelectTrigger>
-            <SelectContent className="sticky top-0 z-50 bg-white">
-              <div className="p-2">
-                <input
-                  type="text"
-                  placeholder="Search Area/Thana..."
-                  className="w-full px-2 py-1 border border-gray-300 rounded mb-2"
-                  value={citySearch}
-                  onChange={(e) => setCitySearch(e.target.value)}
-                />
-              </div>
-              {cities
-                .filter((item: any) =>
-                  item.name.toLowerCase().includes(citySearch.toLowerCase())
-                )
-                .map((item: any) => (
-                  <SelectItem key={item.id} value={item.id}>
-                    {item.name}
-                  </SelectItem>
-                ))}
-            </SelectContent>
-          </Select>
+          <Select
+            options={cities.map((item: any) => ({
+              label: item.name,
+              value: item.id,
+            }))}
+            value={
+              formData?.city_id
+                ? {
+                    label: cities.find(
+                      (item: any) => item.id === formData.city_id
+                    )?.name,
+                    value: formData.city_id,
+                  }
+                : null
+            }
+            onChange={(selectedOption) =>
+              handleSelectCities(selectedOption?.value)
+            }
+            placeholder="Search & Select Area/Thana"
+            isSearchable
+            className="w-full"
+          />
           {errors?.city_id && (
             <p className="text-red-500 text-sm mt-1">{errors.city_id}</p>
           )}
