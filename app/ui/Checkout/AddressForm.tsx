@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import CustomInput from "@/app/ui/CustomInput";
 import {
   Select,
@@ -7,8 +8,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { useState } from "react";
-import { useEffect } from "react";
 
 export default function AddressForm({
   errors,
@@ -18,10 +17,12 @@ export default function AddressForm({
   cities,
   formData,
   setFormData,
-  user, // Assuming user is passed in as a prop or fetched from a context
+  user,
 }: any) {
+  const [stateSearch, setStateSearch] = useState("");
+  const [citySearch, setCitySearch] = useState("");
+
   useEffect(() => {
-    // If the user is authenticated, set the form data to their saved information
     if (user) {
       setFormData({
         ...formData,
@@ -35,16 +36,13 @@ export default function AddressForm({
         additionalNote: user.additionalNote || "",
       });
     }
-  }, [user]); // This will run when `user` is updated
+  }, [user]);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    setFormData({ ...formData, [name]: value });
     if (errors?.[name]) {
       setErrors({ ...errors, [name]: "" });
     }
@@ -65,20 +63,6 @@ export default function AddressForm({
       }
     }
   };
-  const handleSelectCities = (value: string) => {
-    const existCities = cities.find((item: any) => item.id === value);
-    if (existCities) {
-      setFormData({
-        ...formData,
-        city_id: value,
-        city_name: existCities.name,
-      });
-    }
-    // Clear error when user selects a country
-    if (errors?.city_id) {
-      setErrors({ ...errors, city_id: "" });
-    }
-  };
   const handleSelectState = (value: string) => {
     const existState = state.find((item: any) => item.id === value);
     if (existState) {
@@ -87,10 +71,23 @@ export default function AddressForm({
         state_id: value,
         state_name: existState.name,
       });
+      if (errors?.state_id) {
+        setErrors({ ...errors, state_id: "" });
+      }
     }
-    // Clear error when user selects a country
-    if (errors?.state_id) {
-      setErrors({ ...errors, state_id: "" });
+  };
+
+  const handleSelectCities = (value: string) => {
+    const existCities = cities.find((item: any) => item.id === value);
+    if (existCities) {
+      setFormData({
+        ...formData,
+        city_id: value,
+        city_name: existCities.name,
+      });
+      if (errors?.city_id) {
+        setErrors({ ...errors, city_id: "" });
+      }
     }
   };
   return (
@@ -179,20 +176,35 @@ export default function AddressForm({
         )}
       </div>
 
-      {/* State */}
+      {/* State (District) */}
       {state && state.length > 1 && (
         <div className="mb-4">
-          <label className="block text-sm font-medium mb-2">Select District</label>
+          <label className="block text-sm font-medium mb-2">
+            Select District
+          </label>
           <Select value={formData?.state_id} onValueChange={handleSelectState}>
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Select District" />
             </SelectTrigger>
             <SelectContent>
-              {state.map((item: any) => (
-                <SelectItem key={item.id} value={item.id}>
-                  {item.name}
-                </SelectItem>
-              ))}
+              <div className="p-2">
+                <input
+                  type="text"
+                  placeholder="Search District..."
+                  className="w-full px-2 py-1 border border-gray-300 rounded mb-2"
+                  value={stateSearch}
+                  onChange={(e) => setStateSearch(e.target.value)}
+                />
+              </div>
+              {state
+                .filter((item: any) =>
+                  item.name.toLowerCase().includes(stateSearch.toLowerCase())
+                )
+                .map((item: any) => (
+                  <SelectItem key={item.id} value={item.id}>
+                    {item.name}
+                  </SelectItem>
+                ))}
             </SelectContent>
           </Select>
           {errors?.state_id && (
@@ -201,20 +213,35 @@ export default function AddressForm({
         </div>
       )}
 
-      {/* City */}
+      {/* City (Area/Thana) */}
       {cities.length > 0 && (
         <div className="mb-4">
-          <label className="block text-sm font-medium mb-2">Select Area/Thana</label>
+          <label className="block text-sm font-medium mb-2">
+            Select Area/Thana
+          </label>
           <Select value={formData?.city_id} onValueChange={handleSelectCities}>
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Select Area/Thana" />
             </SelectTrigger>
             <SelectContent>
-              {cities.map((item: any) => (
-                <SelectItem key={item.id} value={item.id}>
-                  {item.name}
-                </SelectItem>
-              ))}
+              <div className="p-2">
+                <input
+                  type="text"
+                  placeholder="Search Area/Thana..."
+                  className="w-full px-2 py-1 border border-gray-300 rounded mb-2"
+                  value={citySearch}
+                  onChange={(e) => setCitySearch(e.target.value)}
+                />
+              </div>
+              {cities
+                .filter((item: any) =>
+                  item.name.toLowerCase().includes(citySearch.toLowerCase())
+                )
+                .map((item: any) => (
+                  <SelectItem key={item.id} value={item.id}>
+                    {item.name}
+                  </SelectItem>
+                ))}
             </SelectContent>
           </Select>
           {errors?.city_id && (
@@ -240,9 +267,7 @@ export default function AddressForm({
 
       {/* Additional Note */}
       <div className="mb-4">
-        <label className="block text-sm font-medium mb-2">
-          Note
-        </label>
+        <label className="block text-sm font-medium mb-2">Note</label>
         <Textarea
           name="additionalNote"
           placeholder="Any additional notes (optional)"

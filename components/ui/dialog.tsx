@@ -3,15 +3,13 @@
 import * as React from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden"; // Import VisuallyHidden for accessibility
 
 import { cn } from "@/lib/utils";
 
 const Dialog = DialogPrimitive.Root;
-
 const DialogTrigger = DialogPrimitive.Trigger;
-
 const DialogPortal = DialogPrimitive.Portal;
-
 const DialogClose = DialogPrimitive.Close;
 
 const DialogOverlay = React.forwardRef<
@@ -43,7 +41,19 @@ const DialogContent = React.forwardRef<
       )}
       {...props}
     >
+      {/* Add the DialogTitle here for accessibility */}
+      <DialogHeader>
+        {/* Option 1: Visible Title */}
+        <DialogTitle>Your Dialog Title</DialogTitle>
+
+        {/* Option 2: Visually Hidden Title (if you don’t want it visible) */}
+        {/* <VisuallyHidden>
+          <DialogTitle>Your Dialog Title</DialogTitle>
+        </VisuallyHidden> */}
+      </DialogHeader>
+
       {children}
+
       <DialogPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground search_close">
         <svg
           xmlns="http://www.w3.org/2000/svg"
