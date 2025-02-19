@@ -405,7 +405,7 @@ export default function Checkout({ total_point, data, addressList }: any) {
       if (data.result && selectedPayment == "sslcommerz_payment") {
         const paymentData = {
           payment_type: "cart_payment",
-          combined_order_id: data.combined_order_id,
+          combined_order_id: data.id,
           amount: Number(summary?.grand_total_value) + Number(shipping),
           user_id: cookieValue?.user?.id || temp_user_id,
         };
@@ -418,7 +418,7 @@ export default function Checkout({ total_point, data, addressList }: any) {
         }
       }
       if (data.result && selectedPayment == "cash_payment") {
-        router.push(`/order/success?order_id=${data.combined_order_id}`);
+        router.push(`/order/success?order_id=${data.id}`);
       }
       if (!data.result) {
         toast.error(data.message, {
