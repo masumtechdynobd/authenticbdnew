@@ -186,8 +186,9 @@ export default function AddressForm({
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Select District" />
             </SelectTrigger>
-            <SelectContent className="sticky top-0 z-50 bg-white">
-              <div className="p-2">
+            <SelectContent className="max-h-60 overflow-auto">
+              {/* Sticky search input */}
+              <div className="sticky top-0 bg-white z-50 p-2">
                 <input
                   type="text"
                   placeholder="Search District..."
@@ -196,6 +197,7 @@ export default function AddressForm({
                   onChange={(e) => setStateSearch(e.target.value)}
                 />
               </div>
+              {/* Filtered select items */}
               {state
                 .filter((item: any) =>
                   item.name.toLowerCase().includes(stateSearch.toLowerCase())
