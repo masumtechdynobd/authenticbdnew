@@ -603,7 +603,9 @@ export default function Checkout({ total_point, data, addressList }: any) {
               <div className="space-y-2">
                 <label className="flex items-center space-x-2 border-b-[1px] pb-2 text-base">
                   <input
-                    checked={formData.state_id == "4122"}
+                    checked={
+                      formData.state_id == "4122"
+                    }
                     type="radio"
                     name="shipping"
                     value={Number(inside_dhaka?.value)}
@@ -614,7 +616,9 @@ export default function Checkout({ total_point, data, addressList }: any) {
                 </label>
                 <label className="flex items-center space-x-2 border-b-[1px] pb-2 text-base">
                   <input
-                    checked={formData.state_id != "4122"}
+                    checked={
+                      formData.state_id != "4122"
+                    }
                     type="radio"
                     name="shipping"
                     value={Number(outSide_dhaka?.value)}

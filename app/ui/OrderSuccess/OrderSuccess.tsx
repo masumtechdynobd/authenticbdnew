@@ -56,7 +56,7 @@ export default async function OrderSuccess({ order_id }: any) {
                                 <div className="flex flex-col gap-3">
                                     <p><span className="font-semibold">Order Code:</span> {orderData?.code}</p>
                                     <p><span className="font-semibold">Customer:</span>{orderData?.shipping_address?.name}</p>
-                                    <p><span className="font-semibold">Email:</span> {orderData?.shipping_address?.email}</p>
+                                    <p><span className="font-semibold">Phone:</span> {orderData?.shipping_address?.phone}</p>
                                     <p><span className="font-semibold">Shipping address:</span> {orderData?.shipping_address?.address},{orderData?.shipping_address?.city},{orderData?.shipping_address?.postal_code},{orderData?.shipping_address?.country}</p>
                                 </div>
                                 <div className="flex flex-col gap-3">

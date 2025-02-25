@@ -38,8 +38,6 @@ export default function RatingSection({
                                 </div>
                             ))
                         }
-
-
                     </div>
 
                 </div>
@@ -49,8 +47,6 @@ export default function RatingSection({
             {/* review start  */}
             <ReviewItem id={id} slug={slugData} />
             {/* review end */}
-
-
 
         </div>
 

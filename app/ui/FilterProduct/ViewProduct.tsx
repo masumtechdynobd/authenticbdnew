@@ -7,7 +7,7 @@ import ProductNotFound from "../Product/ProductNotFound/ProductNotFound";
 async function getProducts(
   apiUrl: string,
   page: number = 1,
-  perPage: number = 20
+  perPage: number = 50
 ): Promise<any> {
   console.log("currentPage", page);
   console.log("items per page", perPage);
@@ -30,7 +30,7 @@ async function getProducts(
 
 export default async function ViewProduct({ query }: any) {
   const { apiUrl, currentPage } = query;
-  const perPage = 20; // Set this to a dynamic value based on user preference
+  const perPage = 50; // Set this to a dynamic value based on user preference
   const result = await getProducts(apiUrl, currentPage, perPage);
 
   return (

@@ -39,13 +39,15 @@ export default async function CustomerReview() {
                                 <CarouselItem key={index} className="pl-2 lg:pl-2 basis-[70%] md:basis-[40%]  lg:basis-1/3 xl:basis-1/4 review_item_basis  ">
                                     <div className={`review_item bg-[#EFB5DF]   xl:mb-0 relative  p-4 rounded-[20px] `} key={index} >
                                         <div className="review_thum top-[-43px] sm:top-[-80px]  xl:top-[-110px] absolute xl:w-[220px] xl:h-[220px]  sm:w-[150px] sm:h-[150px] w-[80px] h-[80px] ">
-                                            <CustomImage
-                                                src={item?.avatar}
-                                                width={200}
-                                                height={200}
-                                                alt="offer"
-                                                className="object-contain transition-transform duration-300 ease-in-out transform w-full "
-                                            />
+                                        <CustomImage
+  src={Array.isArray(item?.images) ? item.images[0] : String(item?.images).split(",")[0]}
+  width={200}
+  height={200}
+  alt="offer"
+  className="object-contain transition-transform duration-300 ease-in-out transform w-full"
+/>
+
+
                                         </div>
                                         <div className="review_content flex flex-col gap-[4px] sm:gap-[18px] text-center pt-[28px] xl:pt-[110px] ">
                                             <p className=' text-[12px] sm:text-sm text-neutral-black' >{item?.comment}</p>

@@ -116,7 +116,7 @@ const ProductItem: React.FC<Product> = ({
                 {stroked_price}
               </div>
               {discount > 0 && (
-                <div className="offer max-w-max  text-[12px] sm:text-[12px] ">
+                <div className="offer max-w-max text-primary text-[12px] sm:text-[12px] ">
                   <span>
                     {discount}
                     {discount_text}{" "}

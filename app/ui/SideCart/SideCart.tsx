@@ -11,6 +11,7 @@ import CustomImage from '../CustomImage/CustomImage';
 import { productStore } from '@/lib/hooks/useProductStore';
 import { useRouter } from 'next/navigation';
 
+
 export default function SideCart() {
     const { openCart, setOpenCart } = productStore()
     const router = useRouter()

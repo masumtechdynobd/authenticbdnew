@@ -50,7 +50,6 @@ export default function ResonShop() {
                                     </div>
                                 </CarouselItem>
                             ))}
-
                         </CarouselContent>
                         {/* <CarouselPrevious className=' top-[50px] left-[-12px] sm:left-[-17px]' />
                         <CarouselNext className='top-[50px] right-[-12px] sm:right-[-17px]' /> */}

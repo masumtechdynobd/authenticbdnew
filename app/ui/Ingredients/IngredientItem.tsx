@@ -13,7 +13,7 @@ export default function IngredientItem({ data, desk }: any) {
                     width={desk ? 435 : 296}
                     height={desk ? 339 : 339}
                     alt="offer"
-                    className="object-contain transition-transform duration-300 ease-in-out transform"
+                    className="object-contain transition-transform duration-300 ease-in-out transform rounded-lg"
                 />
             </div>
             <div className='p-3 sm:p-0 flex flex-col items-center justify-center '>

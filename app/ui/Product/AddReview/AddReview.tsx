@@ -12,14 +12,15 @@ import { productStore } from "@/lib/hooks/useProductStore";
 import ImageUploader from "./ImageUploader";
 
 export default function AddReview({ id }: any) {
+  const { data: session } = useSession();
   const [loading, setLoading] = useState<boolean>(false);
   const [uploads, setUploads] = useState<any>([]);
   const [formData, setFormData] = useState<any>({
     title: "",
-    fullName: "",
-    email: "",
-    product_id: id, // Make sure `id` is a valid product ID
-    user_id: "", // Leave empty for anonymous users
+    fullName: session?.user?.name || "",  // Pre-fill name if logged in
+    email: session?.user?.email || "",    // Pre-fill email if logged in
+    product_id: id,
+    user_id: session?.user?.id || "",     // Set user_id if logged in
     comment: "",
     rating: 5,
     recommended: false,
