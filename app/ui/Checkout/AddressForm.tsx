@@ -33,6 +33,7 @@ export default function AddressForm({
         state_id: user.state_id || "",
         city_id: user.city_id || "",
         additionalNote: user.additionalNote || "",
+        postal_code: user.postal_code || "",
       });
     }
   }, [user]); // This will run when `user` is updated
@@ -176,7 +177,7 @@ export default function AddressForm({
       </div>
 
       {/* Postal code */}
-      <div className="mb-4 hidden">
+      {/* <div className="mb-4 hidden">
         <label className="block text-sm font-medium mb-2">Postal code</label>
         <CustomInput
           name="postal_code"
@@ -189,7 +190,7 @@ export default function AddressForm({
         {errors?.postal_code && (
           <p className="text-red-500 text-sm mt-1">{errors.postal_code}</p>
         )}
-      </div>
+      </div> */}
 
       {/* State */}
       {/* {state && state.length > 1 && (
@@ -301,10 +302,10 @@ export default function AddressForm({
       <div className="mb-4">
         <label className="block text-sm font-medium mb-2">Note</label>
         <Textarea
-          name="additionalNote"
+          name="postal_code"
           placeholder="Any additional notes (optional)"
           className="w-full"
-          value={formData.additionalNote}
+          value={formData.postal_code}
           onChange={handleInputChange}
         />
       </div>
