@@ -169,8 +169,8 @@ export default function SideCart() {
     };
 
     const handleCheckout = () => {
-        setOpenCart(false)
-        router.push('/checkout')
+        setOpenCart(false);
+        router.push('/checkout');
         // window.location.href = '/checkout';
     }
 
@@ -295,5 +295,5 @@ export default function SideCart() {
             </div>
 
         </div>
-    )
+    );
 }

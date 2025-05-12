@@ -14,12 +14,12 @@ export default async function Blog() {
 
     return (
         <Container className='pb-[70px]'>
-            <div className='blog  flex flex-col gap-6   ' >
+            <div className='blog  flex flex-col gap-6'>
                 <TranslateHeading translateKey={"lates_blog"} />
                 <div className="blog_area grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 ">
                     {blogs?.data?.map((item: any) => (
 
-                        <div className="ingredients_item " key={item.id} >
+                        <div className="ingredients_item rounded-lg overflow-hidden" key={item.id} >
                             <div className="blog_thumbnail  overflow-hidden ">
                                 <CustomImage
                                     src={item.banner}

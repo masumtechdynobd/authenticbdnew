@@ -32,7 +32,7 @@ const ProductItem: React.FC<Product> = ({
     <div className="p-1">
       <div className="product_item relative bg-white border px-2 py-2  group overflow-hidden rounded-lg">
         {/* free shipping start */}
-        {freeshipping && freeshipping > 0 && (
+        {/* {freeshipping && freeshipping > 0 && (
           <div
             className={`flex flex-col gap-1 absolute overflow-hidden bg-neutral-black rounded-sm z-10 ${
               bestseller > 0 ? "top-[27px] md:top-[35px]" : ""
@@ -44,7 +44,7 @@ const ProductItem: React.FC<Product> = ({
               </p>
             </div>
           </div>
-        )}
+        )} */}
         {/* free shipping end */}
         {/* free shipping start */}
         {bestseller && bestseller > 0 && (

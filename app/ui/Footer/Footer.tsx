@@ -51,7 +51,7 @@ export default async function Footer({ setting, translate }: any) {
 
 
     return (
-        <div className='footer_section py-[55px] '>
+        <div className="footer_section py-[15px] md:py-[55px]">
             <div className="block md:hidden">
             
                   <FooterSeo isMobile={true} />

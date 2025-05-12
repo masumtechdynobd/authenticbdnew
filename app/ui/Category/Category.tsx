@@ -99,7 +99,7 @@ const Category: React.FC<PropType> = (props) => {
                                                             width={150}
                                                             height={150}
                                                             alt={itemChild.name}
-                                                            className='object-contain transition-transform duration-300 ease-in-out transform group-hover:scale-110 mx-auto w-full '
+                                                            className='object-contain transition-transform duration-300 ease-in-out transform group-hover:scale-110 mx-auto w-full rounded-lg'
                                                         />
                                                     </div>
 
