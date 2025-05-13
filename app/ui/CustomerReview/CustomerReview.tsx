@@ -48,7 +48,11 @@ export default async function CustomerReview() {
                                         />
                                         </div>
                                         <div className="review_content flex flex-col gap-[4px] sm:gap-[18px] text-center pt-[28px] xl:pt-[110px] ">
-                                            <p className=' text-[12px] sm:text-sm text-neutral-black' >{item?.comment}</p>
+                                            <p
+                                                className='text-[12px] sm:text-sm text-neutral-black'
+                                                dangerouslySetInnerHTML={{ __html: item?.comment }}
+                                                />
+
                                             <h3 className='text-base text-neutral-black font-bold '>{item?.user_name}</h3>
                                         </div>
                                     </div>
